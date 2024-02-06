@@ -21,12 +21,15 @@ export const Style = StyleSheet.create({
     paddingBottom: 8,
   },
 
-  buttonContainer: {},
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10
+  },
   loginButton: {
     borderRadius: 10,
     width: 100,
-    marginBottom: 5,
-    padding: 5,
+    padding: 8,
     alignItems: "center",
     backgroundColor: "#3887BE",
     color: "#fff",
@@ -35,9 +38,13 @@ export const Style = StyleSheet.create({
   registerButton: {
     borderRadius: 10,
     width: 100,
-    padding: 5,
+    padding: 8,
     alignItems: "center",
     backgroundColor: "#65B741",
     color: "#fff",
   },
+
+  buttonText: {
+    color: '#fff'
+  }
 });
