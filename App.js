@@ -8,7 +8,8 @@ import StudentHome from "./components/screen/student/StudentHome";
 import LibrarianHome from "./components/screen/librarian/LibrarianHome";
 import BookList from "./components/screen/student/BookList";
 import LoanRequest from "./components/screen/student/LoanRequest";
-import AcceptLoan from "./components/screen/librarian/AcceptLoan";
+import UpdateLoanStatus from "./components/screen/librarian/UpdateLoanStatus";
+import LibrarianBookList from "./components/screen/librarian/LibrarianBookList";
 
 const Stack = createStackNavigator()
 
@@ -21,8 +22,9 @@ const App = () => {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="StudentHome" component={StudentHome} options={{ title: 'Student Home', headerLeft: () => null }} />
         <Stack.Screen name="BookList" component={BookList} options={{ title: 'Book List' }} />
+        <Stack.Screen name="LibrarianBookList" component={LibrarianBookList} options={{ title: 'Librarian Book List' }} />
         <Stack.Screen name="LoanRequest" component={LoanRequest} options={{ title: 'Loan Request' }} />
-        <Stack.Screen name="AcceptLoan" component={AcceptLoan} options={{ title: 'Accept Loan' }} />
+        <Stack.Screen name="UpdateLoanStatus" component={UpdateLoanStatus} options={{ title: 'Accept Loan' }} />
         <Stack.Screen name="LibrarianHome" component={LibrarianHome} options={{ title: 'Librarian Home' }} />
       </Stack.Navigator>
     </NavigationContainer>

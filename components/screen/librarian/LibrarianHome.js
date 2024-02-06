@@ -25,11 +25,11 @@ const LibrarianHome = ({ navigation }) => {
     }, []);
 
     const navigateBookList = () => {
-        navigation.navigate('BookList');
+        navigation.navigate('LibrarianBookList');
     }
 
     const navigateLoanRequest = () => {
-        navigation.navigate('LoanRequest');
+        navigation.navigate('UpdateLoanStatus');
     }
 
     const logout = () => {

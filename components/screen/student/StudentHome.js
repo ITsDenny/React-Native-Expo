@@ -51,10 +51,10 @@ const StudentHome = ({ navigation }) => {
                     <FontAwesome5 name="hand-holding" size={50} color="#1976D2" />
                     <Text style={styles.buttonText}>Pinjaman Buku</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.card} onPress={navigateLoanRequest}>
+                {/* <TouchableOpacity style={styles.card} onPress={navigateLoanRequest}>
                     <FontAwesome5 name="exchange-alt" size={50} color="#3C3633" />
                     <Text style={styles.buttonText}>Pengembalian</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 <TouchableOpacity style={styles.card} onPress={logout}>
                     <FontAwesome5 name="sign-out-alt" size={50} color="#F44336" />
