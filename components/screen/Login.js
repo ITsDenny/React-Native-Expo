@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { FontAwesome5 } from '@expo/vector-icons';
 import Toast from "react-native-simple-toast";
 import AsyncStorage from "@react-native-async-storage/async-storage";
