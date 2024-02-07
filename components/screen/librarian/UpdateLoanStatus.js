@@ -109,7 +109,6 @@ const UpdateLoanStatus = () => {
                     <Text style={styles.title}>Title: {loan.book_title}</Text>
                     <Text>User: {loan.user_name}</Text>
                     <Text>Status : {loan.loan_status}</Text>
-                    <Text>Id : {loan.loan_id}</Text>
                 </View>
                 <View style={styles.buttonContainer}>
                     {loan.loan_status === 'request' && (
