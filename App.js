@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 
-import LoginForm from "./components/screen/Login";
+import EmployeeLogin from "./components/screen/EmployeeLogin";
 import Home from "./components/screen/Home";
 import Register from "./components/screen/Register";
 import StudentHome from "./components/screen/student/StudentHome";
@@ -18,7 +18,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginForm} />
+        <Stack.Screen name="EmployeeLogin" component={EmployeeLogin} options={{ headerLeft: () => null }} />
         <Stack.Screen name="Register" component={Register} options={{ headerLeft: () => null }} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="StudentHome" component={StudentHome} options={{ title: 'Student Home', headerLeft: () => null }} />

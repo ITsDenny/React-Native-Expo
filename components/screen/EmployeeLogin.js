@@ -1,37 +1,36 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { FontAwesome5 } from '@expo/vector-icons';
 import Toast from "react-native-simple-toast";
 import axios from "axios";
 
-const LoginForm = ({ navigation }) => {
-  const [username, setUsername] = useState("");
+const EmployeeLogin = ({ navigation }) => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     try {
-      if (!username || !password) {
+      if (!email || !password) {
         Toast.show("The field cannot be empty!");
         return;
       }
       setLoading(true);
       const response = await axios.post(
-        "https://incredible-victorious-kingfisher.glitch.me/library/login",
+        "https://incredible-victorious-kingfisher.glitch.me/employee/login",
         {
-          username: username,
+          email: email,
           password: password,
         }
       );
 
-      if (response.data.role === 'student') {
+      if (response.data.role === 'employee') {
         if (response.data.id) {
           const loginData = JSON.stringify(response.data);
           await AsyncStorage.setItem('loginData', loginData);
           navigation.navigate("StudentHome",
             {
-              username: response.data.username,
+              email: response.data.email,
               id: response.data.id
             }
           );
@@ -39,7 +38,7 @@ const LoginForm = ({ navigation }) => {
           console.error("API Response is missing id property:", response.data);
         }
       } else if (response.data.role === 'librarian') {
-        navigation.navigate("LibrarianHome", { username: response.data.username });
+        navigation.navigate("LibrarianHome", { email: response.data.email });
       } else {
         console.log("Invalid role:", response.data.role);
       }
@@ -50,10 +49,6 @@ const LoginForm = ({ navigation }) => {
     }
   };
 
-  const navigateRegister = async () => {
-    navigation.navigate("Register");
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
@@ -61,9 +56,9 @@ const LoginForm = ({ navigation }) => {
         <FontAwesome5 name="user" size={20} color="#666" style={styles.inputIcon} />
         <TextInput
           style={styles.input}
-          placeholder="Username"
-          value={username}
-          onChangeText={(text) => setUsername(text)}
+          placeholder="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
         />
       </View>
       <View style={styles.inputContainer}>
@@ -90,13 +85,13 @@ const LoginForm = ({ navigation }) => {
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.registerButton}
           onPress={navigateRegister}
           disabled={loading}
         >
           <Text style={styles.buttonText}>Register</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -156,4 +151,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginForm;
+export default EmployeeLogin;
