@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator, Image } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import Toast from "react-native-simple-toast";
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 
 const EmployeeLogin = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("denny1@email.com");
+  const [password, setPassword] = useState("123");
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
@@ -24,23 +25,27 @@ const EmployeeLogin = ({ navigation }) => {
         }
       );
 
-      if (response.data.role === 'employee') {
-        if (response.data.id) {
-          const loginData = JSON.stringify(response.data);
+      console.log("Response:", response.data);
+
+      const { data } = response;
+      const { role } = data;
+
+
+      if (role === 'employee') {
+        const { id, email } = data;
+        if (id) {
+          const loginData = JSON.stringify(data);
           await AsyncStorage.setItem('loginData', loginData);
-          navigation.navigate("StudentHome",
-            {
-              email: response.data.email,
-              id: response.data.id
-            }
-          );
+          console.log("Login Data:", loginData);
+          navigation.navigate("EmployeeHome", { email, id });
         } else {
-          console.error("API Response is missing id property:", response.data);
+          console.error("API Response is missing id property:", data);
         }
-      } else if (response.data.role === 'librarian') {
-        navigation.navigate("LibrarianHome", { email: response.data.email });
+      } else if (role === 'librarian') {
+        const { email } = data;
+        navigation.navigate("LibrarianHome", { email });
       } else {
-        console.log("Invalid role:", response.data.role);
+        console.log("Invalid role:", role);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -49,9 +54,11 @@ const EmployeeLogin = ({ navigation }) => {
     }
   };
 
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      {/* <Image source={require('./assets/adptive_icon.png')} style={styles.logo} />  */}
+      <Text style={styles.title}>Manage Employee</Text>
       <View style={styles.inputContainer}>
         <FontAwesome5 name="user" size={20} color="#666" style={styles.inputIcon} />
         <TextInput
@@ -84,14 +91,6 @@ const EmployeeLogin = ({ navigation }) => {
             <Text style={styles.buttonText}>Login</Text>
           )}
         </TouchableOpacity>
-
-        {/* <TouchableOpacity
-          style={styles.registerButton}
-          onPress={navigateRegister}
-          disabled={loading}
-        >
-          <Text style={styles.buttonText}>Register</Text>
-        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -104,10 +103,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
   },
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+  },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+    color: "#333",
   },
   inputContainer: {
     flexDirection: "row",
@@ -132,13 +137,6 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   loginButton: {
-    backgroundColor: "#4CAF50",
-    paddingVertical: 15,
-    paddingHorizontal: 40,
-    borderRadius: 5,
-    marginRight: 10,
-  },
-  registerButton: {
     backgroundColor: "#1976D2",
     paddingVertical: 15,
     paddingHorizontal: 40,

@@ -11,6 +11,7 @@ import BookList from "./components/screen/student/BookList";
 import LoanRequest from "./components/screen/student/LoanRequest";
 import UpdateLoanStatus from "./components/screen/librarian/UpdateLoanStatus";
 import LibrarianBookList from "./components/screen/librarian/LibrarianBookList";
+import EmployeeHome from "./components/screen/employee/EmployeeHome";
 
 const Stack = createStackNavigator()
 
@@ -21,6 +22,7 @@ const App = () => {
         <Stack.Screen name="EmployeeLogin" component={EmployeeLogin} options={{ headerLeft: () => null }} />
         <Stack.Screen name="Register" component={Register} options={{ headerLeft: () => null }} />
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="EmployeeHome" component={EmployeeHome} />
         <Stack.Screen name="StudentHome" component={StudentHome} options={{ title: 'Student Home', headerLeft: () => null }} />
         <Stack.Screen name="BookList" component={BookList} options={{ title: 'Book List' }} />
         <Stack.Screen name="LibrarianBookList" component={LibrarianBookList} options={{ title: 'Librarian Book List' }} />
