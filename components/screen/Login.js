@@ -6,8 +6,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 const LoginForm = ({ navigation }) => {
-  const [username, setUsername] = useState("biji");
-  const [password, setPassword] = useState("123");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
