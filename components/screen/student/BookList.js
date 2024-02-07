@@ -50,7 +50,7 @@ const BookList = ({ navigation }) => {
                 console.error("Error loading user ID:", error);
             }
         };
-        loadUserId();
+        loadUserId(); //add this
     }, []);
 
     const handleLoan = async (bookId) => {
